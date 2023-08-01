@@ -13,3 +13,23 @@ public class ConfigController {
         return ResponseEntity.ok(config);
     }
 }
+
+@Injectable()
+export class ConfigService {
+
+  private config: any;
+
+  constructor(private http: HttpClient) { }
+
+  loadConfig() {
+    return this.http.get('/api/config').toPromise().then(config => {
+      this.config = config;
+    });
+  }
+
+  getConfig() {
+    return this.config;
+  }
+}
+
+
